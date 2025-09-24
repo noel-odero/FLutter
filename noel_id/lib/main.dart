@@ -4,8 +4,15 @@ void main() {
   runApp(const MaterialApp(home: NoelCard()));
 }
 
-class NoelCard extends StatelessWidget {
+class NoelCard extends StatefulWidget {
   const NoelCard({super.key});
+
+  @override
+  State<NoelCard> createState() => _NoelCardState();
+}
+
+class _NoelCardState extends State<NoelCard> {
+  int flutterLevel = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +23,31 @@ class NoelCard extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                flutterLevel += 1;
+              });
+            },
+            backgroundColor: Colors.grey[800],
+            child: Icon(Icons.add, color: Colors.white),
+          ),
+          SizedBox(width: 4),
+          FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                flutterLevel = 0;
+              });
+            },
+            backgroundColor: Colors.grey[800],
+            heroTag: 'reset',
+            child: Icon(Icons.refresh, color: Colors.white),
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
@@ -50,7 +82,7 @@ class NoelCard extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              'Beginner',
+              '$flutterLevel',
               style: TextStyle(
                 color: Colors.amberAccent[200],
                 letterSpacing: 2.0,
