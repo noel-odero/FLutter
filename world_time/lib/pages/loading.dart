@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+// import 'package:http/http.dart';
+// import 'dart:convert';
 import 'package:world_time/services/world_time.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -17,6 +17,7 @@ class _LoadingState extends State<Loading> {
       flag: 'german.png',
       location: 'Berlin',
       url: 'Europe/Berlin',
+      isDaytime: true, // Provide an initial value, adjust as needed
     );
     await instance.getTime();
     Navigator.pushReplacementNamed(
@@ -26,6 +27,7 @@ class _LoadingState extends State<Loading> {
         'location': instance.location,
         'flag': instance.flag,
         'time': instance.time,
+        'isDaytime': instance.isDaytime,
       },
     );
   }
