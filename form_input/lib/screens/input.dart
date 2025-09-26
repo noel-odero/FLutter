@@ -9,6 +9,9 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final usernameController = TextEditingController();
+  final passWordController = TextEditingController();
+
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +43,47 @@ class _LoginState extends State<Login> {
                     SizedBox(width: 30),
                     Expanded(
                       child: TextFormField(
+                        maxLength: 20,
                         controller: usernameController,
                         decoration: InputDecoration(
                           hintText: 'Enter your username',
                           border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Text(
+                      'Password',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    Expanded(
+                      child: TextFormField(
+                        obscureText: _obscureText,
+                        maxLength: 10,
+                        controller: passWordController,
+                        decoration: InputDecoration(
+                          hintText: 'Enter your username',
+                          border: OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                          ),
                         ),
                       ),
                     ),
