@@ -11,6 +11,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _formGlobalKey = GlobalKey<FormState>();
+
+  Priority _selectedPriority = Priority.low;
+  String _title = '';
+  String _description = '';
+
   final List<Todo> todos = [
     const Todo(
       title: 'Buy milk',
@@ -61,7 +66,12 @@ class _HomeState extends State<Home> {
 
                       return null;
                     },
+                    onSaved: (value) {
+                      _title = value!;
+                    },
                   ),
+
+                  //todo description
                   TextFormField(
                     maxLength: 20,
                     decoration: const InputDecoration(
@@ -74,14 +84,47 @@ class _HomeState extends State<Home> {
 
                       return null;
                     },
+                    onSaved: (value) {
+                      _description = value!;
+                    },
                   ),
-                  // todo description
+
                   // priority
+                  DropdownButtonFormField(
+                    initialValue: _selectedPriority,
+                    decoration: const InputDecoration(
+                      label: Text('Priority of todo'),
+                    ),
+                    items: Priority.values.map((p) {
+                      return DropdownMenuItem(value: p, child: Text(p.title));
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedPriority = value!;
+                      });
+                      ;
+                    },
+                  ),
                   // submit button
                   const SizedBox(height: 20),
                   FilledButton(
                     onPressed: () {
-                      _formGlobalKey.currentState!.validate();
+                      if (_formGlobalKey.currentState!.validate()) {
+                        _formGlobalKey.currentState!.save();
+
+                        setState(() {
+                          todos.add(
+                            Todo(
+                              title: _title,
+                              description: _description,
+                              priority: _selectedPriority,
+                            ),
+                          );
+                        });
+
+                        _formGlobalKey.currentState!.reset();
+                        _selectedPriority = Priority.low;
+                      }
                     },
                     style: FilledButton.styleFrom(
                       backgroundColor: Colors.grey[800],
