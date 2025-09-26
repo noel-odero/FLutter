@@ -10,6 +10,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final TextEditingController _emailController = TextEditingController();
   final List<Todo> todos = [
     const Todo(
       title: 'Buy milk',
@@ -42,7 +43,20 @@ class _HomeState extends State<Home> {
           children: [
             Expanded(child: TodoList(todos: todos)),
 
-            // form stuff below here
+            TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                label: Text('Enter your email'),
+              ),
+            ),
+            const SizedBox(height: 20),
+            FilledButton(
+              onPressed: () {
+                print(_emailController.text.trim());
+              },
+              child: const Text('print the email'),
+            ),
           ],
         ),
       ),
