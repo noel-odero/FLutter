@@ -11,7 +11,7 @@ class _LoginState extends State<Login> {
   final usernameController = TextEditingController();
   final passWordController = TextEditingController();
   String? _selectedGender;
-  Map<String, bool> _courses = {
+  final Map<String, bool> _courses = {
     "Machine Learning": false,
     "Full stack": false,
     "Mobile dev": false,

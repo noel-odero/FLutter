@@ -102,7 +102,6 @@ class _HomeState extends State<Home> {
                       setState(() {
                         _selectedPriority = value!;
                       });
-                      ;
                     },
                   ),
                   // submit button
