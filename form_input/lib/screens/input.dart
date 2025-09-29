@@ -18,6 +18,7 @@ class _LoginState extends State<Login> {
   };
 
   bool _obscureText = true;
+  double _tuitionValue = 0.0;
 
   @override
   void dispose() {
@@ -191,6 +192,98 @@ class _LoginState extends State<Login> {
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 120,
+                      child: Text(
+                        'Tuition',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    Expanded(
+                      child: Slider(
+                        value: _tuitionValue,
+                        min: 0.0,
+                        max: 100.0,
+                        divisions: 100,
+                        activeColor: Colors.lightGreen,
+                        inactiveColor: Colors.grey[300],
+                        onChanged: (value) {
+                          setState(() {
+                            _tuitionValue = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle submit
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Submitted successful 😁😁😁'),
+                            backgroundColor: Colors.black87,
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.lightGreen[300],
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle clear
+                        setState(() {
+                          usernameController.clear();
+                          passWordController.clear();
+                          _selectedGender = null;
+                          _courses.updateAll((key, value) => false);
+                          _tuitionValue = 0.0;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        'Clear',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
               ],
             ),
           ),
