@@ -219,7 +219,7 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                         id: DateTime.now().millisecondsSinceEpoch.toString(),
                         name: nameController.text,
                         description: descriptionController.text,
-                        projectId: selectedProject!.id,
+                        projectId: selectedProject.id,
                       );
 
                       await DataService.addTask(task);
