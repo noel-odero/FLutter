@@ -110,7 +110,7 @@ class _GestureDemoPageState extends State<GestureDemoPage> {
     double clampedY = newCenter.dy.clamp(minY, maxY);
 
     setState(() {
-      scale = newScale as double;
+      scale = newScale;
       boxCenter = Offset(clampedX, clampedY);
       lastGesture = (details.scale - 1.0).abs() > 0.01
           ? 'Pinch/Zoom'
@@ -145,11 +145,6 @@ class _GestureDemoPageState extends State<GestureDemoPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // const Text(
-                    //   'Gestures demo — Tap • Double Tap • Long Press • Drag/Pan • Pinch/Zoom',
-                    //   style: TextStyle(fontSize: 13),
-                    // ),
-                    // const SizedBox(height: 6),
                     Row(
                       children: [
                         const Text(
